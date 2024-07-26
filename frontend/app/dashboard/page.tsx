@@ -1,17 +1,17 @@
-// import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@/utils/supabase/server';
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button"
 import Link from 'next/link';
 
-export default async function Notes() {
-    // const supabase = createClient();
-    // const {
-    //     data: { user },
-    // } = await supabase.auth.getUser();
+export default async function Dashboard() {
+    const supabase = createClient();
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
 
-    // if (!user) {
-    //     return redirect("/login");
-    // }
+    if (!user) {
+        return redirect("/login");
+    }
 
     return (
         <main className="flex min-h-screen flex-col items-center space-y-8 p-24">

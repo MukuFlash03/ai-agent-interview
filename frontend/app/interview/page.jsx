@@ -1,20 +1,17 @@
 'use client'
 
-// import { createClient } from '@/utils/supabase/server';
-import { redirect } from "next/navigation";
-// import { Button } from "@/components/ui/button"
+import { redirect, useRouter } from "next/navigation";
 import Button from '@/app/interview/Button';
 import Vapi from "@vapi-ai/web";
 import { useState, useEffect } from 'react';
 import { isPublicKeyMissingError } from "@/lib/utils";
 import ActiveCallDetail from '@/app/interview/components/call/ActiveCallDetail'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
-
+// import insertTranscript from "@/lib/database/manageTranscripts";
 
 const VAPI_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_VAPI_PUBLIC_API_KEY;
 const vapi = new Vapi(VAPI_PUBLIC_API_KEY);
 console.log(VAPI_PUBLIC_API_KEY);
-
 
 const App = () => {
     const [connecting, setConnecting] = useState(false);
@@ -27,12 +24,15 @@ const App = () => {
 
     const [supabase] = useState(() => createBrowserSupabaseClient())
 
+    const router = useRouter();
+
     // hook into Vapi events
     useEffect(() => {
         const checkUser = async () => {
             const { data: { user } } = await supabase.auth.getUser()
             if (!user) {
-                redirect("/login")
+                // redirect("/login")
+                router.push("/login")
             }
         }
         checkUser()
@@ -49,6 +49,7 @@ const App = () => {
             setConnected(false);
 
             setShowPublicKeyInvalidMessage(false);
+            // insertTranscript()
         });
 
         vapi.on("speech-start", () => {
