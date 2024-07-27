@@ -9,7 +9,7 @@ import ActiveCallDetail from '@/app/interview/components/call/ActiveCallDetail'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 // import insertTranscript from "@/lib/database/manageTranscripts";
 
-const VAPI_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_VAPI_PUBLIC_API_KEY;
+const VAPI_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_VAPI_PUBLIC_API_KEY!;
 const vapi = new Vapi(VAPI_PUBLIC_API_KEY);
 
 const VAPI_ASSISTANT_ID = process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID;
@@ -98,7 +98,7 @@ const App = () => {
     };
 
     return (
-        <main className="flex min-h-screen flex-col items-center space-y-8 p-24">
+        <main className="flex min-h-screen flex-col justify-center items-center space-y-8 p-24">
             <div className="py-10">
                 Welcome to AI Interviews !
             </div>
@@ -116,6 +116,7 @@ const App = () => {
                         label="Start Interview"
                         onClick={startCallInline}
                         isLoading={connecting}
+                        disabled={false}
                     />
                 ) : (
                     <ActiveCallDetail

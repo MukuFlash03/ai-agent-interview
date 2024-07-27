@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/interview/page.jsx", "app/interview/components/call/ActiveCallDetail.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/interview/page.tsx", "app/interview/components/call/ActiveCallDetail.tsx"],
   "exclude": ["node_modules"]
 }

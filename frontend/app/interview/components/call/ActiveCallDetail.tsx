@@ -2,7 +2,7 @@ import AssistantSpeechIndicator from '@/app/interview/components/call/AssistantS
 import Button from "@/app/interview/Button";
 import VolumeLevel from "@/app/interview/components/call/VolumeLevel";
 
-const ActiveCallDetail = ({ assistantIsSpeaking, volumeLevel, onEndCallClick }) => {
+const ActiveCallDetail = ({ assistantIsSpeaking, volumeLevel, onEndCallClick }: { assistantIsSpeaking: boolean; volumeLevel: number; onEndCallClick: () => void }) => {
     return (
         <div>
             <div
@@ -23,7 +23,7 @@ const ActiveCallDetail = ({ assistantIsSpeaking, volumeLevel, onEndCallClick }) 
                 <VolumeLevel volume={volumeLevel} />
             </div>
             <div style={{ marginTop: "20px", textAlign: "center" }}>
-                <Button label="End Call" onClick={onEndCallClick} />
+                <Button label="End Call" onClick={onEndCallClick} disabled={false} />
             </div>
         </div>
     );

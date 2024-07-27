@@ -1,6 +1,6 @@
 import ScaleLoader from "react-spinners/ScaleLoader";
 
-const Button = ({ label, onClick, isLoading, disabled }: { label: string; onClick: () => void; isLoading: boolean; disabled: boolean }) => {
+const Button = ({ label, onClick, isLoading, disabled }: { label: string; onClick: () => void; isLoading?: boolean; disabled: boolean }) => {
     const opacity = disabled ? 0.75 : 1;
     const cursor = disabled ? "not-allowed" : "pointer";
 
