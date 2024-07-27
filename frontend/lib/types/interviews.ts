@@ -1,10 +1,10 @@
 export type InterviewsResponse = {
-    id: string,
+    interview_id: string,
     user_id: string,
     email: string,
     status: string,
 };
 
 export type SelectedInterviewsResponse = Pick<InterviewsResponse,
-    'id' | 'user_id' | 'email' | 'status'
+    'interview_id' | 'user_id' | 'email' | 'status'
 >;

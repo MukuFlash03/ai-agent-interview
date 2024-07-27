@@ -16,6 +16,12 @@ export default async function TakeInterview() {
         return redirect("/login");
     }
 
+    const { data, error } = await supabase
+        .from('interviews')
+        .select()
+
+    console.log(data);
+
     return (
         <main className="flex min-h-screen flex-col items-center space-y-8 p-24">
             <div className="py-10">
@@ -29,7 +35,7 @@ export default async function TakeInterview() {
                 {/* <Button variant="secondary">Upload Resume</Button> */}
             </div>
             <div>
-                <TableCandidateInterviews />
+                <TableCandidateInterviews data={data || []} />
             </div>
         </main>
     )
