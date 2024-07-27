@@ -20,7 +20,7 @@ const CustomButton = ({ label, onClick, isLoading, disabled }: { label: string; 
 
     return (
         <button
-            onClick={onClick}
+            type="submit"
             style={{
                 backgroundColor: "white",
                 color: "black",

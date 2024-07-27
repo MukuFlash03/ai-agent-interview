@@ -1,7 +1,7 @@
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button"
-import CustomButton from '@/components/CustomButton';
+import CustomButton from '@/components/CustomSubmitButton';
 import Link from 'next/link';
 import { TableInterviews } from './TableInterviews';
 import { uploadResume } from '@/lib/files/uploadFiles';

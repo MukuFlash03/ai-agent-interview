@@ -28,6 +28,7 @@
 
 import { useTransition } from 'react'
 import { uploadResume } from '@/lib/files/uploadFiles'
+import CustomSubmitButton from '@/components/CustomSubmitButton'
 import React from 'react'
 
 export function ResumeUploadForm() {
@@ -49,12 +50,17 @@ export function ResumeUploadForm() {
 
     return (
         <main>
-            <h1>React Server Component: Upload</h1>
             <form onSubmit={handleSubmit}>
                 <input type="file" name="file" />
-                <button type="submit" disabled={isPending}>
+                <CustomSubmitButton
+                    label={isPending ? 'Uploading...' : 'Upload Resume'}
+                    onClick={() => startTransition(() => { })}
+                    isLoading={isPending}
+                    disabled={isPending}
+                />
+                {/* <button type="submit" disabled={isPending}>
                     {isPending ? 'Uploading...' : 'Upload'}
-                </button>
+                </button> */}
             </form>
         </main>
     )
