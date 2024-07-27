@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button"
 import CustomButton from '@/components/CustomSubmitButton';
 import Link from 'next/link';
+import { uploadResume } from '@/lib/files/uploadFiles';
+import { TableCandidateInterviews } from '../../../student/take/TableCandidateInterviews';
 
 export default async function StudentDashboard() {
     const supabase = createClient();
@@ -19,13 +21,8 @@ export default async function StudentDashboard() {
             <div className="py-10">
                 Welcome to AI Interviews !
             </div>
-            <div className="z-10 w-full max-w-5xl items-center justify-center space-x-24 font-mono text-sm lg:flex">
-                <Button asChild>
-                    <Link href="/dashboard/recruiter">Recruiter Dashboard</Link>
-                </Button>
-                <Button asChild>
-                    <Link href="/dashboard/student">Student Dashboard</Link>
-                </Button>
+            <div>
+                <TableCandidateInterviews />
             </div>
         </main>
     )
