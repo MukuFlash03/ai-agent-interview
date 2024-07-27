@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { fetchTranscripts } from '@/lib/database/manageTranscripts';
-import { ListCallsResponse, SelectedListCallsResponse } from '@/lib/types/call';
+import { ListCallsResponse, SelectedListCallsResponse } from '@/lib/types/calls';
 import { CallDataCell } from './CallDataCell';
 
 import {

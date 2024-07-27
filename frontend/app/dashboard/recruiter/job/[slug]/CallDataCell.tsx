@@ -1,8 +1,8 @@
-import { SelectedInterviewsResponse } from "@/lib/types/interviews";
+import { SelectedCandidatesResponse } from "@/lib/types/candidates";
 
 import { TableCell } from "@/components/ui/table"
 
-export const CallDataCell = ({ data, field }: { data: SelectedInterviewsResponse; field: keyof SelectedInterviewsResponse }) => {
+export const CallDataCell = ({ data, field }: { data: SelectedCandidatesResponse; field: keyof SelectedCandidatesResponse }) => {
     const value = data[field];
 
     // if (field === 'analysis' && value) {

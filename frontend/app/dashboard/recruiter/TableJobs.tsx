@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { fetchTranscripts } from '@/lib/database/manageTranscripts';
-import { JobsResponse, SelectedJobsResponse } from '@/lib/types/job';
+import { JobsResponse, SelectedJobsResponse } from '@/lib/types/jobs';
 import { CallDataCell } from './CallDataCell';
 import { Button } from "@/components/ui/button"
 import Link from 'next/link';

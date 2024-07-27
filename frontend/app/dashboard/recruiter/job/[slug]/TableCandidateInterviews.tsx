@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { fetchTranscripts } from '@/lib/database/manageTranscripts';
-import { SelectedInterviewsResponse } from '@/lib/types/interviews';
-import { CallDataCell } from '../../../student/take/CallDataCell';
+import { SelectedCandidatesResponse } from '@/lib/types/candidates';
+import { CallDataCell } from './CallDataCell';
 import { Button } from "@/components/ui/button"
 import Link from 'next/link';
+import { createClient } from '@/utils/supabase/server';
+
 
 import {
     Table,
@@ -18,29 +20,32 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
+async function insertInterviewData(candidate_data: { user_id: string; email: string }) {
+    const response = await fetch('/api/insert-interview-data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(candidate_data),
+    });
 
-export function TableCandidateInterviews() {
-    const [interviewResponseData, setInterviewResponseData] = useState<SelectedInterviewsResponse[] | null>(null);
+    if (!response.ok) {
+        throw new Error('Failed to insert interview data');
+    }
+
+    return response.json();
+}
+
+
+export function TableCandidateInterviews({ data }: { data: SelectedCandidatesResponse[] }) {
+    const [candidatesResponseData, setCandidatesResponseData] = useState<SelectedCandidatesResponse[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-
-    const data = [
-        {
-            id: 'int-candidate-1',
-            user_id: 'cand-123',
-            status: 'pending',
-        },
-        {
-            id: 'int-candidate-2',
-            user_id: 'cand-456',
-            status: 'pending',
-        },
-    ]
 
     useEffect(() => {
         const loadData = async () => {
             try {
-                setInterviewResponseData(data);
+                setCandidatesResponseData(data);
                 setLoading(false);
             } catch (err) {
                 setError('Failed to fetch interviews response data');
@@ -53,10 +58,24 @@ export function TableCandidateInterviews() {
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error while fetching list calls response data: {error}</div>;
-    if (!interviewResponseData) return <div>No list calls data available</div>;
+    if (!candidatesResponseData) return <div>No list calls data available</div>;
 
-    console.log(interviewResponseData);
+    console.log(candidatesResponseData);
 
+
+    const handleSendInterview = async (candidateData: { user_id: string; email: string }) => {
+        // const handleSendInterview = async () => {
+        try {
+            // const candidateData = {
+            //     user_id: candidatesResponseData[0]['user_id'],
+            //     email: candidatesResponseData[0]['email']
+            // };
+            const result = await insertInterviewData(candidateData);
+            console.log('Interview data inserted successfully', result);
+        } catch (error) {
+            console.error("Error sending interview:", error);
+        }
+    };
 
     return (
         <Table>
@@ -64,24 +83,30 @@ export function TableCandidateInterviews() {
             <TableHeader>
                 <TableRow>
                     {/* <TableHead className="w-[100px]">Call ID</TableHead> */}
-                    <TableHead>Job ID</TableHead>
-                    <TableHead>Job Title</TableHead>
-                    <TableHead>Job Posting</TableHead>
+                    <TableHead>UserID</TableHead>
+                    <TableHead>Email</TableHead>
+                    {/* <TableHead>Interview ID</TableHead> */}
+                    <TableHead>Status</TableHead>
                     {/* <TableHead className="text-right">Amount</TableHead> */}
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {interviewResponseData
+                {candidatesResponseData
                     // .filter(isValidItem)
-                    .map((jobData) => (
-                        <TableRow key={jobData.id}>
+                    .map((candidateData) => (
+                        <TableRow key={candidateData.interview_id}>
                             {/* <TableCell className="font-medium">{callData.id}</TableCell> */}
-                            <CallDataCell data={jobData} field="id" />
-                            <CallDataCell data={jobData} field="user_id" />
-                            <CallDataCell data={jobData} field="status" />
+                            <CallDataCell data={candidateData} field="user_id" />
+                            <CallDataCell data={candidateData} field="email" />
+                            {/* <CallDataCell data={candidateData} field="interview_id" /> */}
+                            <CallDataCell data={candidateData} field="status" />
                             <TableCell>
-                                <Button>
-                                    {/* Write to interview db table */}
+                                <Button onClick={() => {
+                                    handleSendInterview({
+                                        user_id: candidateData.user_id,
+                                        email: candidateData.email
+                                    });
+                                }}>
                                     Send Interview
                                 </Button>
                             </TableCell>

@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button"
 import CustomButton from '@/components/CustomSubmitButton';
 import Link from 'next/link';
-import { TableInterviews } from '@/app/dashboard/student/practice/TableInterviews';
+import { TableInterviews } from '@/app/dashboard/student/[id]/practice/TableInterviews';
 import { TableJobs } from './TableJobs';
 import { uploadResume } from '@/lib/files/uploadFiles';
 

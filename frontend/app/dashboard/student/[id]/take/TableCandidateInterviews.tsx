@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchTranscripts } from '@/lib/database/manageTranscripts';
 import { SelectedInterviewsResponse } from '@/lib/types/interviews';
-import { CallDataCell } from '../../recruiter/job/[slug]/CallDataCell';
+import { CallDataCell } from './CallDataCell';
 import { Button } from "@/components/ui/button"
 import Link from 'next/link';
 
@@ -27,12 +27,14 @@ export function TableCandidateInterviews() {
     const data = [
         {
             id: 'int-candidate-1',
-            user_id: 'cand-123',
+            user_id: 'e94f250a-7036-4d84-a060-7ff37eb1691c',
+            email: 'mukulm2010@gmail.com',
             status: 'pending',
         },
         {
             id: 'int-candidate-2',
-            user_id: 'cand-456',
+            user_id: '107bd945-545e-4182-9250-9dc33a75d7df',
+            email: 'kareemamin8888@gmail.com',
             status: 'pending',
         },
     ]
@@ -66,6 +68,7 @@ export function TableCandidateInterviews() {
                     {/* <TableHead className="w-[100px]">Call ID</TableHead> */}
                     <TableHead>Interview ID</TableHead>
                     <TableHead>UserID</TableHead>
+                    <TableHead>Email</TableHead>
                     <TableHead>Status</TableHead>
                     {/* <TableHead className="text-right">Amount</TableHead> */}
                 </TableRow>
@@ -78,6 +81,7 @@ export function TableCandidateInterviews() {
                             {/* <TableCell className="font-medium">{callData.id}</TableCell> */}
                             <CallDataCell data={interviewData} field="id" />
                             <CallDataCell data={interviewData} field="user_id" />
+                            <CallDataCell data={interviewData} field="email" />
                             <CallDataCell data={interviewData} field="status" />
                             <TableCell>
                                 <Button asChild>

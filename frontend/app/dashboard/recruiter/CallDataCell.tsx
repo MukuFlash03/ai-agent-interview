@@ -1,4 +1,4 @@
-import { SelectedJobsResponse } from "@/lib/types/job";
+import { SelectedJobsResponse } from "@/lib/types/jobs";
 
 import { TableCell } from "@/components/ui/table"
 
