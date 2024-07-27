@@ -1,0 +1,15 @@
+Can you tell me about your experience as a Software Development Intern at the National Renewable Energy Laboratory?
+How did you improve the data processing in the model build and analysis pipeline during your internship at NREL?
+What role did you play in optimizing system scalability at NREL?
+Could you elaborate on your experience with AWS services like ECR, Cloudwatch, and Inspector?
+What was your approach to troubleshooting and resolving model build pipeline failures in staging and production environments?
+Can you describe your experience with implementing OFSAA LLFP fintech solutions during your time at Oracle Financial Services Software?
+How did you enhance the UI for the Individual Assessment module at Oracle, and what was the impact?
+Could you explain your experience with PL/SQL and how you used it to automate tasks at Oracle?
+What projects have you worked on that demonstrate your skills in Python and generative AI?
+Can you tell me about your YouTube Conversation Chatbot project? What technologies did you use and what were the main challenges?
+How did you leverage AWS and OpenStack in your Cloud-based Video Face Recognition App project?
+Could you describe your experience with React.js and Next.js in developing full-stack applications?
+What motivated you to pursue a Master's in Computer Science at Arizona State University?
+Can you tell me about your experience with Docker and how you've used it in your projects or internships?
+How do you stay updated with the latest trends in software development and AI technologies?
