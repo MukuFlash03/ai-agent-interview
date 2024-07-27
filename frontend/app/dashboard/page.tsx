@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { TableInterviews } from './TableInterviews';
 import { uploadResume } from '@/lib/files/uploadFiles';
 import ResumeUploadForm from './ResumeUploadForm';
+import ResumeReader from './ResumeReader';
 
 export default async function Dashboard() {
     const supabase = createClient();
