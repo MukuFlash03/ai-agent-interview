@@ -7,12 +7,14 @@ import { useState, useEffect } from 'react';
 import { isPublicKeyMissingError } from "@/lib/utils";
 import ActiveCallDetail from '@/app/interview/components/call/ActiveCallDetail'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
-// import insertTranscript from "@/lib/database/manageTranscripts";
+import { insertTranscript } from '@/lib/database/manageTranscripts'
 
 const VAPI_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_VAPI_PUBLIC_API_KEY!;
 const vapi = new Vapi(VAPI_PUBLIC_API_KEY);
 
 const VAPI_ASSISTANT_ID = process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID;
+console.log(VAPI_ASSISTANT_ID);
+
 
 const App = () => {
     const [connecting, setConnecting] = useState(false);
@@ -50,7 +52,7 @@ const App = () => {
             setConnected(false);
 
             setShowPublicKeyInvalidMessage(false);
-            // insertTranscript()
+            insertTranscript()
         });
 
         vapi.on("speech-start", () => {
@@ -77,15 +79,6 @@ const App = () => {
         // we only want this to fire on mount
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    // const supabase = createClient();
-    // const {
-    //     data: { user },
-    // } = await supabase.auth.getUser();
-
-    // if (!user) {
-    //     return redirect("/login");
-    // }
 
     // call start handler
     const startCallInline = () => {

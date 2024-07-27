@@ -2,6 +2,7 @@ import { createClient } from '@/utils/supabase/server';
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button"
 import Link from 'next/link';
+import { TableInterviews } from './TableInterviews';
 
 export default async function Dashboard() {
     const supabase = createClient();
@@ -20,9 +21,12 @@ export default async function Dashboard() {
             </div>
             <div className="z-10 w-full max-w-5xl items-center justify-center space-x-24 font-mono text-sm lg:flex">
                 <Button asChild>
-                    <Link href="/interview">Conduct Interviews</Link>
+                    <Link href="/interview">Practice Interviews</Link>
                 </Button>
                 <Button variant="secondary">Upload Resume</Button>
+            </div>
+            <div>
+                <TableInterviews />
             </div>
         </main>
     )
