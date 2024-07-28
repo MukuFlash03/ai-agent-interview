@@ -2,9 +2,6 @@
 
 [Video Tutorial](https://youtu.be/WWwDL9G9xkU)
 
-Run
-`poetry shell`
-
 First, run the development server:
 
 ```bash
