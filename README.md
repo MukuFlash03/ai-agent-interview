@@ -3,6 +3,8 @@
 AI Interview Conductor for Recruiters / Hiring Manager + Mock Interview Platform for Interviewees
 Built during the [AI Supaheroes Build Club Hackathon](https://lu.ma/3sjrxbfn) held in San Francisco on Jul 27th, 2024 
 
+
+
 Challenge: 
 Job seekers often struggle with interview preparation, lacking personalized practice and feedback based on their resumes.
  Recruiters face challenges in efficiently screening and evaluating candidates due to time constraints and the volume of applications.
@@ -14,10 +16,13 @@ For Recruiters: Streamlined hiring process, improved candidate screening efficie
 
 # Sponsors Used: Vapi, Supabase, Groq
 
+[<img width="1440" alt="Screenshot 2024-07-28 at 12 47 04 AM" src="https://github.com/user-attachments/assets/a5eee8dd-e3d6-4fcb-9dc5-c592c30d8cd6">](https://www.loom.com/share/c23dab69dcbb4d4287ef99df67165e8e?sid=445afcea-07f1-48be-9500-f504bfc1e4f7)
+
 # Architecture Diagram
 
 <img width="980" alt="Screenshot 2024-07-27 at 8 58 37 PM" src="https://github.com/user-attachments/assets/604b8d5d-ab3c-4e9d-8c42-53f610c67e52">
 
+------
 
 # Vapi
 
@@ -27,6 +32,7 @@ For Recruiters: Streamlined hiring process, improved candidate screening efficie
 
 <img width="1440" alt="Screenshot 2024-07-27 at 8 49 14 PM" src="https://github.com/user-attachments/assets/2492e521-b6e4-45e4-bbf9-27279e6d2925">
 
+------
 
 # Supabase
 
@@ -34,6 +40,7 @@ For Recruiters: Streamlined hiring process, improved candidate screening efficie
 
 <img width="1440" alt="Screenshot 2024-07-27 at 8 52 06 PM" src="https://github.com/user-attachments/assets/7a0a73b4-20e6-44b5-9007-76fcd093f1d6">
 
+-----
 
 # Groq
 
