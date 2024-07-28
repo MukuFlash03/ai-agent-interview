@@ -55,7 +55,7 @@ export function TableJobs() {
     if (error) return <div>Error while fetching list calls response data: {error}</div>;
     if (!jobsResponseData) return <div>No list calls data available</div>;
 
-    console.log(jobsResponseData);
+    // console.log(jobsResponseData);
 
 
     return (

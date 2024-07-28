@@ -41,7 +41,7 @@ export function TableCandidateInterviews({ data }: { data: SelectedInterviewsRes
 
     console.log("Interview Data from page.tsx");
 
-    console.log(data);
+    // console.log(data);
 
 
     useEffect(() => {
@@ -62,7 +62,7 @@ export function TableCandidateInterviews({ data }: { data: SelectedInterviewsRes
     if (error) return <div>Error while fetching list calls response data: {error}</div>;
     if (!interviewResponseData) return <div>No list calls data available</div>;
 
-    console.log(interviewResponseData);
+    // console.log(interviewResponseData);
 
 
     return (

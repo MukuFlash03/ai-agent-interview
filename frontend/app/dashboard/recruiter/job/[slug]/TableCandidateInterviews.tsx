@@ -60,7 +60,7 @@ export function TableCandidateInterviews({ data }: { data: SelectedCandidatesRes
     if (error) return <div>Error while fetching list calls response data: {error}</div>;
     if (!candidatesResponseData) return <div>No list calls data available</div>;
 
-    console.log(candidatesResponseData);
+    // console.log(candidatesResponseData);
 
 
     const handleSendInterview = async (candidateData: { user_id: string; email: string }) => {

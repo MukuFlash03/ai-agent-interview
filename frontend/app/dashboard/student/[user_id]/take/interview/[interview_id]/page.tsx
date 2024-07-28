@@ -1,6 +1,7 @@
 'use client'
 
 import { redirect, useRouter } from "next/navigation";
+import { useParams } from 'next/navigation';
 import Button from '@/app/interview/Button';
 import Vapi from "@vapi-ai/web";
 import { useState, useEffect } from 'react';
@@ -16,7 +17,65 @@ const VAPI_ASSISTANT_ID = process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID;
 console.log(VAPI_ASSISTANT_ID);
 
 
+async function updateInterviewData(candidate_data: { user_id: string; interview_id: string }) {
+    const response = await fetch('/api/update-interview-data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(candidate_data),
+    });
+
+    if (!response.ok) {
+        console.log(response);
+
+        throw new Error('Failed to update interview data');
+    }
+
+    return response.json();
+}
+
+
 const App = () => {
+    const params = useParams();
+
+    const getParamAsString = (param: string | string[] | undefined): string => {
+        if (Array.isArray(param)) {
+            return param[0] || '';
+        }
+        return param || '';
+    };
+
+    const userId = getParamAsString(params.user_id);
+    const interviewId = getParamAsString(params.interview_id);
+
+    // const handleUpdateInterview = async (candidateData: { user_id: string; interview_id: string }) => {
+    const handleUpdateInterview = async () => {
+        try {
+            // const candidateData = {
+            //     user_id: candidatesResponseData[0]['user_id'],
+            //     email: candidatesResponseData[0]['email']
+            // };
+            // console.log("Candidate data received from params");
+            // console.log(candidateData.user_id);
+            // console.log(candidateData.interview_id);
+
+
+            // const result = await updateInterviewData(candidateData);
+            const result = await updateInterviewData({
+                user_id: userId,
+                interview_id: interviewId
+            });
+            console.log('Interview data updated successfully', result);
+        } catch (error) {
+            console.error("Error sending interview:", error);
+        }
+    };
+
+    // console.log('Params from useParams:', params);
+    // console.log("User ID: " + params.user_id);
+    // console.log("Interview ID: " + params.interview_id);
+
     const [connecting, setConnecting] = useState(false);
     const [connected, setConnected] = useState(false);
 
@@ -87,6 +146,9 @@ const App = () => {
         vapi.start(VAPI_ASSISTANT_ID);
     };
     const endCall = () => {
+        console.log("User ID: " + params.user_id);
+        console.log("Interview ID: " + params.interview_id);
+        handleUpdateInterview();
         vapi.stop();
     };
 
@@ -105,12 +167,20 @@ const App = () => {
                 }}
             >
                 {!connected ? (
-                    <Button
-                        label="Start Interview"
-                        onClick={startCallInline}
-                        isLoading={connecting}
-                        disabled={false}
-                    />
+                    <>
+                        <Button
+                            label="Start Interview"
+                            onClick={startCallInline}
+                            isLoading={connecting}
+                            disabled={false}
+                        />
+                        {/* <Button
+                            label="Go Back"
+                            onClick={() => router.push(`/dashboard/student`)}
+                            isLoading={connecting}
+                            disabled={false}
+                        /> */}
+                    </>
                 ) : (
                     <ActiveCallDetail
                         assistantIsSpeaking={assistantIsSpeaking}

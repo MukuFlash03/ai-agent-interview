@@ -20,7 +20,7 @@ export default async function TakeInterview() {
         .from('interviews')
         .select()
 
-    console.log(data);
+    // console.log(data);
 
     return (
         <main className="flex min-h-screen flex-col items-center space-y-8 p-24">

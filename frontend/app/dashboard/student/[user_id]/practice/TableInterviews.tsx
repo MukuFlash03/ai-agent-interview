@@ -46,7 +46,7 @@ export function TableInterviews() {
     if (error) return <div>Error while fetching list calls response data: {error}</div>;
     if (!listCallsResponseData) return <div>No list calls data available</div>;
 
-    console.log(listCallsResponseData);
+    // console.log(listCallsResponseData);
 
 
     // // Usage in TableInterviews.tsx

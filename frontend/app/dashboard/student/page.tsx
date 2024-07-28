@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button"
 import CustomButton from '@/components/CustomSubmitButton';
 import Link from 'next/link';
-import { TableInterviews } from '@/app/dashboard/student/[id]/practice/TableInterviews';
+import { TableInterviews } from '@/app/dashboard/student/[user_id]/practice/TableInterviews';
 import { uploadResume } from '@/lib/files/uploadFiles';
 
 export default async function StudentDashboard() {

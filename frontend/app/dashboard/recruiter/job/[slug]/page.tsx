@@ -17,10 +17,10 @@ export default async function StudentDashboard() {
     }
 
     const { data, error } = await supabase
-        .from('candidates')
+        .from('interviews')
         .select()
 
-    console.log(data);
+    // console.log(data);
 
     // const data = [
     //     {

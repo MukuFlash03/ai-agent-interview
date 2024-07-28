@@ -17,7 +17,7 @@ export async function insertTranscript() {
         return redirect("/login");
     }
 
-    console.log(user);
+    // console.log(user);
 }
 
 export async function fetchTranscripts(): Promise<SelectedListCallsResponse[]> {
