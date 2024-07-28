@@ -14,7 +14,6 @@ import { useParams } from 'next/navigation';
 interface PageProps {
     params: {
         user_id: string;
-        interview_id: string;
     };
 }
 
@@ -39,7 +38,6 @@ export default async function TakeInterview({ params }: PageProps) {
     // console.log("User ID from params:", userId);
 
     const userId = params.user_id;
-    // const interviewId = params.interview_id;
 
     console.log("User ID from params:", userId);
     // console.log("Interview ID from params:", interviewId);

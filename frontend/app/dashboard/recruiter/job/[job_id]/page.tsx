@@ -6,7 +6,15 @@ import Link from 'next/link';
 import { uploadResume } from '@/lib/files/uploadFiles';
 import { TableCandidateInterviews } from './TableCandidateInterviews';
 
-export default async function StudentDashboard() {
+interface PageProps {
+    params: {
+        job_id: string;
+    };
+}
+
+
+// export default async function StudentDashboard() {
+export default async function StudentDashboard({ params }: PageProps) {
     const supabase = createClient();
     const {
         data: { user },
@@ -22,20 +30,9 @@ export default async function StudentDashboard() {
 
     // console.log(data);
 
-    // const data = [
-    //     {
-    //         user_id: 'e94f250a-7036-4d84-a060-7ff37eb1691c',
-    //         email: 'mukulm2010@gmail.com',
-    //         interview_id: 'int-candidate-1',
-    //         status: 'pending',
-    //     },
-    //     {
-    //         user_id: '107bd945-545e-4182-9250-9dc33a75d7df',
-    //         email: 'kareemamin8888@gmail.com',
-    //         interview_id: 'int-candidate-2',
-    //         status: 'pending',
-    //     },
-    // ]
+    const jobId = params.job_id;
+
+    console.log("User ID from params:", jobId);
 
     return (
         <main className="flex min-h-screen flex-col items-center space-y-8 p-24">
@@ -44,6 +41,11 @@ export default async function StudentDashboard() {
             </div>
             <div>
                 <TableCandidateInterviews data={data || []} />
+            </div>
+            <div>
+                <Button asChild>
+                    <Link href={`/dashboard/recruiter/job/${jobId}/feedback`}>Check Feedback</Link>
+                </Button>
             </div>
         </main>
     )

@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { isPublicKeyMissingError } from "@/lib/utils";
 import ActiveCallDetail from '@/app/interview/components/call/ActiveCallDetail'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
-import { insertTranscript } from '@/lib/database/manageTranscripts'
+import { fetchLatestTranscripts, insertTranscript } from '@/lib/database/manageTranscripts'
 
 const VAPI_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_VAPI_PUBLIC_API_KEY!;
 const vapi = new Vapi(VAPI_PUBLIC_API_KEY);
@@ -30,6 +30,25 @@ async function updateInterviewData(candidate_data: { user_id: string; interview_
         console.log(response);
 
         throw new Error('Failed to update interview data');
+    }
+
+    return response.json();
+}
+
+
+// async function updateFeedbackData(candidate_data: { interview_id: string, user_id: string; email: string, summary: string, transcript: string }) {
+// async function updateFeedbackData(candidate_data: { interview_id: string, user_id: string; }) {
+async function updateFeedbackData(candidate_data: { interview_id: string, user_id: string; summary: string, transcript: string }) {
+    const response = await fetch('/api/insert-feedback-data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(candidate_data),
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to insert feedback data');
     }
 
     return response.json();
@@ -65,6 +84,22 @@ const App = () => {
             const result = await updateInterviewData({
                 user_id: userId,
                 interview_id: interviewId
+            });
+            console.log('Interview data updated successfully', result);
+        } catch (error) {
+            console.error("Error sending interview:", error);
+        }
+    };
+
+    const handleUpdateFeedback = async () => {
+        try {
+            // const result = await updateInterviewData(candidateData);
+            const data = await fetchLatestTranscripts();
+            const result = await updateFeedbackData({
+                interview_id: interviewId,
+                user_id: userId,
+                summary: data.analysis?.summary || '',
+                transcript: data.transcript || '',
             });
             console.log('Interview data updated successfully', result);
         } catch (error) {
@@ -146,10 +181,11 @@ const App = () => {
         vapi.start(VAPI_ASSISTANT_ID);
     };
     const endCall = () => {
+        vapi.stop();
         console.log("User ID: " + params.user_id);
         console.log("Interview ID: " + params.interview_id);
         handleUpdateInterview();
-        vapi.stop();
+        handleUpdateFeedback();
     };
 
     return (
