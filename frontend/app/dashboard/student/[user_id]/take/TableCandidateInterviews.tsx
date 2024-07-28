@@ -18,8 +18,13 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
+interface TableCandidateInterviewsProps {
+    data: SelectedInterviewsResponse[];
+    user_id: string;
+}
 
-export function TableCandidateInterviews({ data }: { data: SelectedInterviewsResponse[] }) {
+// export function TableCandidateInterviews({ data }: { data: SelectedInterviewsResponse[] }) {
+export function TableCandidateInterviews({ data, user_id }: TableCandidateInterviewsProps) {
     const [interviewResponseData, setInterviewResponseData] = useState<SelectedInterviewsResponse[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -80,7 +85,7 @@ export function TableCandidateInterviews({ data }: { data: SelectedInterviewsRes
             </TableHeader>
             <TableBody>
                 {interviewResponseData
-                    // .filter(isValidItem)
+                    .filter((interviewData) => interviewData.user_id === user_id)
                     .map((interviewData) => (
                         <TableRow key={interviewData.interview_id}>
                             {/* <TableCell className="font-medium">{callData.id}</TableCell> */}
