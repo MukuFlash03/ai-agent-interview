@@ -58,9 +58,9 @@ export function ResumeUploadForm() {
                     isLoading={isPending}
                     disabled={isPending}
                 />
-                {/* <button type="submit" disabled={isPending}>
+                <button type="submit" disabled={isPending}>
                     {isPending ? 'Uploading...' : 'Upload'}
-                </button> */}
+                </button>
             </form>
         </main>
     )

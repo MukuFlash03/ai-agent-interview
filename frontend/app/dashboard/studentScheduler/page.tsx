@@ -20,7 +20,8 @@ export default async function Dashboard() {
     return (
         <main className="flex min-h-screen flex-col items-center space-y-8 p-24">
             <div className="py-10">
-                Welcome to AI Interviews !
+                {/* Welcome to AI Interviews ! */}
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">Welcome to AI Interviews!</h1>
             </div>
             <div className="z-10 w-full max-w-5xl items-center justify-center space-x-24 font-mono text-sm lg:flex">
                 {/* <Button asChild>

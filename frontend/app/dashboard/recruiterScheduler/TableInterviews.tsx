@@ -50,6 +50,11 @@ export function TableInterviews() {
 
     console.log(listCallsResponseData);
 
+    // const data = fetchTranscripts();
+    // console.log("test");
+    // console.log(data);
+
+    
 
     // // Usage in TableInterviews.tsx
     // {
@@ -60,12 +65,13 @@ export function TableInterviews() {
 
     return (
         <Table>
-            <TableCaption>A list of your interviews.</TableCaption>
+            <TableCaption>interview ratings.</TableCaption>
             <TableHeader>
                 <TableRow>
                     {/* <TableHead className="w-[100px]">Call ID</TableHead> */}
                     <TableHead>Interview-ID</TableHead>
-                    <TableHead>Accept/Decline</TableHead>
+                    <TableHead>Interviewee Name</TableHead> 
+                    <TableHead>Rating</TableHead>
                     {/* <TableHead>Transcript</TableHead>
                     <TableHead>Started At</TableHead>
                     <TableHead>Ended At</TableHead> */}
@@ -79,11 +85,24 @@ export function TableInterviews() {
                         <TableRow key={callData.id}>
                             {/* <TableCell className="font-medium">{callData.id}</TableCell> */}
                             <CallDataCell data={callData} field="id" />
+                            <CallDataCell data={callData} field="name" />
                             {/* <CallDataCell data={callData} field="analysis" /> */}
                             <TableCell>
                                 <Button asChild>
-                                    <Link href="/dashboard//interview">Practice Interviews</Link>
+                                    {/* <Link href="/dashboard//interview">Practice Interviews</Link> */}
                                 </Button>
+
+                                <div id="star-rating">
+                                    <span className="star" data-value="1">★</span>
+                                    <span className="star" data-value="2">★</span>
+                                    <span className="star" data-value="3">★</span>
+                                    <span className="star" data-value="4">★</span>
+                                    <span className="star" data-value="5">★</span>
+                                </div>
+                                <script src="starRating.js" defer></script>
+
+
+
                             </TableCell>
                             
                             {/* <CallDataCell data={callData} field="transcript" />
@@ -121,5 +140,6 @@ export function TableInterviews() {
                 </TableRow>
             </TableFooter> */}
         </Table>
+        
     )
 }

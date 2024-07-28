@@ -48,7 +48,6 @@ export function TableInterviews() {
 
     console.log(listCallsResponseData);
 
-
     // // Usage in TableInterviews.tsx
     // {
     //     ['analysis', 'transcript', 'startedAt', 'endedAt', 'endedReason'].map((field) => (
