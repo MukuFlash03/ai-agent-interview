@@ -3,8 +3,6 @@
 AI Interview Conductor for Recruiters / Hiring Manager + Mock Interview Platform for Interviewees
 Built during the [AI Supaheroes Build Club Hackathon](https://lu.ma/3sjrxbfn) held in San Francisco on Jul 27th, 2024 
 
-# Sponsors Used: Vapi, Supabase, Groq
-
 Challenge: 
 Job seekers often struggle with interview preparation, lacking personalized practice and feedback based on their resumes.
  Recruiters face challenges in efficiently screening and evaluating candidates due to time constraints and the volume of applications.
@@ -13,6 +11,12 @@ Impact:
 For Job Seekers: Increased confidence and preparedness for real interviews, leading to higher chances of securing job offers.
 
 For Recruiters: Streamlined hiring process, improved candidate screening efficiency, and better hiring decisions, resulting in a more effective recruitment process and optimal talent acquisition.
+
+# Sponsors Used: Vapi, Supabase, Groq
+
+# Architecture Diagram
+
+<img width="980" alt="Screenshot 2024-07-27 at 8 58 37 PM" src="https://github.com/user-attachments/assets/604b8d5d-ab3c-4e9d-8c42-53f610c67e52">
 
 
 # Vapi
