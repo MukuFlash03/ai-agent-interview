@@ -16,7 +16,7 @@ For Recruiters: Streamlined hiring process, improved candidate screening efficie
 
 # Sponsors Used: Vapi, Supabase, Groq
 
-[<img width="1440" alt="Screenshot 2024-07-28 at 12 47 04 AM" src="https://github.com/user-attachments/assets/a5eee8dd-e3d6-4fcb-9dc5-c592c30d8cd6">](https://www.loom.com/share/c23dab69dcbb4d4287ef99df67165e8e?sid=445afcea-07f1-48be-9500-f504bfc1e4f7)
+[<img width="1440" alt="Screenshot 2024-07-28 at 12 47 04 AM" src="https://github.com/user-attachments/assets/a5eee8dd-e3d6-4fcb-9dc5-c592c30d8cd6">](https://www.loom.com/share/53c34fc682b24f70a581029ae49a6adb?sid=02326e4a-0889-4224-8585-a45a6b616149)
 
 # Architecture Diagram
 
