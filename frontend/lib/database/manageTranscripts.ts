@@ -91,6 +91,11 @@ export async function fetchLatestTranscripts(): Promise<SelectedListCallsRespons
             endedAt: item.endedAt,
         }));
 
+        console.log("Logging selected data");
+
+        console.log(selectedData);
+
+
         return selectedData[0];
     } catch (error) {
         console.error('Error fetching data:', error);

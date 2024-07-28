@@ -11,8 +11,12 @@ export async function POST(request: Request) {
         const { data, error } = await supabase
             .from('feedback')
             // .insert({ interview_id, user_id, email, summary, transcript });
-            .insert({ interview_id, user_id, summary, transcript });
+            .insert({ interview_id, user_id, summary, transcript })
+            .select();
         // .insert({ interview_id, user_id });
+
+        // console.log(data);
+
 
         if (error) throw error;
 

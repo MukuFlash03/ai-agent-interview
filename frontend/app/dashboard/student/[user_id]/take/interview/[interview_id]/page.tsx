@@ -2,11 +2,11 @@
 
 import { redirect, useRouter } from "next/navigation";
 import { useParams } from 'next/navigation';
-import Button from '@/app/interview/Button';
+import Button from "./Button";
 import Vapi from "@vapi-ai/web";
 import { useState, useEffect } from 'react';
 import { isPublicKeyMissingError } from "@/lib/utils";
-import ActiveCallDetail from '@/app/interview/components/call/ActiveCallDetail'
+import ActiveCallDetail from "./components/call/ActiveCallDetail";
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { fetchLatestTranscripts, insertTranscript } from '@/lib/database/manageTranscripts'
 
@@ -15,7 +15,6 @@ const vapi = new Vapi(VAPI_PUBLIC_API_KEY);
 
 const VAPI_ASSISTANT_ID = process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID;
 console.log(VAPI_ASSISTANT_ID);
-
 
 async function updateInterviewData(candidate_data: { user_id: string; interview_id: string }) {
     const response = await fetch('/api/update-interview-data', {
@@ -95,6 +94,9 @@ const App = () => {
         try {
             // const result = await updateInterviewData(candidateData);
             const data = await fetchLatestTranscripts();
+            console.log('Transcripts fetched successfully', data);
+            console.log(data);
+
             const result = await updateFeedbackData({
                 interview_id: interviewId,
                 user_id: userId,
