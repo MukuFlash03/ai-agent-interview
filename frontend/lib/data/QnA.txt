@@ -1,4 +1,0 @@
-1. Can you tell me about your experience as a Software Development Intern at the National Renewable Energy Laboratory?
-2. What projects have you worked on that demonstrate your skills in Python and generative AI?
-3. What motivated you to pursue a Master's in Computer Science at Arizona State University?
-4. How do you stay updated with the latest trends in software development and AI technologies?
