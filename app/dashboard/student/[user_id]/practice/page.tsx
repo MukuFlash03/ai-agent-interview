@@ -1,12 +1,10 @@
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button"
-import CustomButton from '@/components/CustomSubmitButton';
 import Link from 'next/link';
 import { TableInterviews } from './TableInterviews';
-import { uploadResume } from '@/lib/files/uploadFiles';
 import ResumeUploadForm from './ResumeUploadForm';
-import ResumeReader from './ResumeReader';
+import { concatenateName } from '@/lib/utils';
 
 export default async function Dashboard() {
     const supabase = createClient();
@@ -27,7 +25,7 @@ export default async function Dashboard() {
                 <Button asChild>
                     <Link href={`/dashboard/student/${user.id}/practice/interview/`}>Practice Interviews</Link>
                 </Button>
-                <ResumeUploadForm />
+                <ResumeUploadForm user_name={concatenateName(user.user_metadata.full_name)} />
                 {/* <Button variant="secondary">Upload Resume</Button> */}
             </div>
             <div>

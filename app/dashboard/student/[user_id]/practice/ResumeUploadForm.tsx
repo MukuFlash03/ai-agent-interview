@@ -4,25 +4,10 @@ import { useTransition } from 'react'
 import { uploadResume } from '@/lib/files/uploadFiles'
 import CustomSubmitButton from '@/components/CustomSubmitButton'
 import React from 'react'
+import { fileExists } from '@/lib/utils'
+import { fetchResumeContent, fetchQuestions, getFilesListKnowledgeBase, sendQuestionsToVapiAssistant } from '@/lib/api_calls'
 
-async function fetchResumeText(filePath: string) {
-    // async function uploadResume(formData: FormData) {
-    const response = await fetch('/api/upload-resume', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        // body: JSON.stringify({ formData: formData }),
-        body: JSON.stringify({ filePath: filePath }),
-    });
-    if (!response.ok) {
-        console.log(response);
-        throw new Error('Failed to extract text from resume PDF');
-    }
-    return response.json();
-}
-
-export function ResumeUploadForm() {
+export function ResumeUploadForm({ user_name }: { user_name: string }) {
     const [isPending, startTransition] = useTransition()
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -30,10 +15,13 @@ export function ResumeUploadForm() {
         const formData = new FormData(event.currentTarget)
         startTransition(async () => {
             try {
-                // const result = await uploadResume(formData)
                 const { filePath } = await uploadResume(formData)
-                const result = await fetchResumeText(filePath)
-                console.log(result);
+                const result_fetchResumeContent = await fetchResumeContent(filePath)
+                const result_resumeQuestions = await fetchQuestions(result_fetchResumeContent.text)
+                const result_getFilesList = await getFilesListKnowledgeBase()
+                const existsFile: boolean = fileExists(`Questions_${user_name}`, result_getFilesList.fileNames)
+                const result_sendQuestionsToVapiAssistant = await sendQuestionsToVapiAssistant({ existsFile: existsFile, resumeQuestions: result_resumeQuestions.resumeQuestions })
+
 
             } catch (error) {
                 // Handle error (e.g., show an error message)

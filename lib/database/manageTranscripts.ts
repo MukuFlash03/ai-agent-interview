@@ -4,7 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { ListCallsResponse, SelectedListCallsResponse } from "@/lib/types/calls";
 
-const VAPI_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_VAPI_PRIVATE_API_KEY!;
+const VAPI_PRIVATE_API_KEY = process.env.NEXT_PUBLIC_VAPI_PRIVATE_API_KEY!;
 
 export async function insertTranscript() {
     const supabase = createClient();
@@ -33,7 +33,7 @@ export async function fetchTranscripts(): Promise<SelectedListCallsResponse[]> {
 
     const options = {
         method: 'GET',
-        headers: { Authorization: `Bearer ${VAPI_PUBLIC_API_KEY}` }
+        headers: { Authorization: `Bearer ${VAPI_PRIVATE_API_KEY}` }
     };
 
     try {
@@ -72,7 +72,7 @@ export async function fetchLatestTranscripts(): Promise<SelectedListCallsRespons
 
     const options = {
         method: 'GET',
-        headers: { Authorization: `Bearer ${VAPI_PUBLIC_API_KEY}` }
+        headers: { Authorization: `Bearer ${VAPI_PRIVATE_API_KEY}` }
     };
 
     try {
