@@ -1,35 +1,26 @@
-// 'use client'
-
-// import { useTransition } from 'react'
-// import CustomButton from '@/components/CustomButton'
-// import { uploadResume } from '@/lib/files/uploadFiles'
-
-// const ResumeUploadForm = () => {
-//     const [isPending, startTransition] = useTransition()
-
-//     return (
-//         <form action={uploadResume}>
-//             <CustomButton
-//                 label="Upload Resume"
-//                 onClick={() => startTransition(() => { })}
-//                 isLoading={isPending}
-//                 disabled={isPending}
-//             />
-//         </form>
-//     )
-// }
-
-// export default ResumeUploadForm
-
-/* */
-
-
 'use client'
 
 import { useTransition } from 'react'
 import { uploadResume } from '@/lib/files/uploadFiles'
 import CustomSubmitButton from '@/components/CustomSubmitButton'
 import React from 'react'
+
+async function fetchResumeText(filePath: string) {
+    // async function uploadResume(formData: FormData) {
+    const response = await fetch('/api/upload-resume', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        // body: JSON.stringify({ formData: formData }),
+        body: JSON.stringify({ filePath: filePath }),
+    });
+    if (!response.ok) {
+        console.log(response);
+        throw new Error('Failed to extract text from resume PDF');
+    }
+    return response.json();
+}
 
 export function ResumeUploadForm() {
     const [isPending, startTransition] = useTransition()
@@ -39,8 +30,11 @@ export function ResumeUploadForm() {
         const formData = new FormData(event.currentTarget)
         startTransition(async () => {
             try {
-                await uploadResume(formData)
-                // Handle successful upload (e.g., show a success message)
+                // const result = await uploadResume(formData)
+                const { filePath } = await uploadResume(formData)
+                const result = await fetchResumeText(filePath)
+                console.log(result);
+
             } catch (error) {
                 // Handle error (e.g., show an error message)
                 console.error('Upload failed:', error)
@@ -58,9 +52,6 @@ export function ResumeUploadForm() {
                     isLoading={isPending}
                     disabled={isPending}
                 />
-                {/* <button type="submit" disabled={isPending}>
-                    {isPending ? 'Uploading...' : 'Upload'}
-                </button> */}
             </form>
         </main>
     )

@@ -15,9 +15,8 @@ export async function uploadResume(data: FormData) {
     const rootDir = process.cwd();
     const path = join(rootDir, 'lib', 'data', file.name);
 
-    // const path = join('/', 'tmp', file.name)
     await writeFile(path, buffer)
     console.log(`open ${path} to see the uploaded file`)
 
-    return { success: true }
+    return { filePath: path, success: true }
 }

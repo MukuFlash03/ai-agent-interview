@@ -20,7 +20,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.376.0",
     "next": "14.2.3",
-    "pdfjs-dist": "^4.5.136",
+    "pdf-ts": "^0.0.2",
     "react": "^18",
     "react-dom": "^18",
     "react-spinners": "^0.14.1",

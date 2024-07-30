@@ -1,6 +1,6 @@
 'use client'
 
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useParams } from 'next/navigation';
 import Button from '@/components/call/Button'
 import ActiveCallDetail from '@/components/call/ActiveCallDetail'
@@ -14,7 +14,6 @@ const VAPI_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_VAPI_PUBLIC_API_KEY!;
 const vapi = new Vapi(VAPI_PUBLIC_API_KEY);
 
 const VAPI_ASSISTANT_ID = process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID;
-console.log(VAPI_ASSISTANT_ID);
 
 async function updateInterviewData(candidate_data: { user_id: string; interview_id: string }) {
     const response = await fetch('/api/update-interview-data', {
@@ -24,19 +23,14 @@ async function updateInterviewData(candidate_data: { user_id: string; interview_
         },
         body: JSON.stringify(candidate_data),
     });
-
     if (!response.ok) {
         console.log(response);
 
         throw new Error('Failed to update interview data');
     }
-
     return response.json();
 }
 
-
-// async function updateFeedbackData(candidate_data: { interview_id: string, user_id: string; email: string, summary: string, transcript: string }) {
-// async function updateFeedbackData(candidate_data: { interview_id: string, user_id: string; }) {
 async function updateFeedbackData(candidate_data: { interview_id: string, user_id: string; summary: string, transcript: string }) {
     const response = await fetch('/api/insert-feedback-data', {
         method: 'POST',
@@ -67,19 +61,8 @@ const App = () => {
     const userId = getParamAsString(params.user_id);
     const interviewId = getParamAsString(params.interview_id);
 
-    // const handleUpdateInterview = async (candidateData: { user_id: string; interview_id: string }) => {
     const handleUpdateInterview = async () => {
         try {
-            // const candidateData = {
-            //     user_id: candidatesResponseData[0]['user_id'],
-            //     email: candidatesResponseData[0]['email']
-            // };
-            // console.log("Candidate data received from params");
-            // console.log(candidateData.user_id);
-            // console.log(candidateData.interview_id);
-
-
-            // const result = await updateInterviewData(candidateData);
             const result = await updateInterviewData({
                 user_id: userId,
                 interview_id: interviewId
@@ -92,7 +75,6 @@ const App = () => {
 
     const handleUpdateFeedback = async () => {
         try {
-            // const result = await updateInterviewData(candidateData);
             const data = await fetchLatestTranscripts();
             console.log('Transcripts fetched successfully', data);
             console.log(data);
@@ -109,10 +91,6 @@ const App = () => {
         }
     };
 
-    // console.log('Params from useParams:', params);
-    // console.log("User ID: " + params.user_id);
-    // console.log("Interview ID: " + params.interview_id);
-
     const [connecting, setConnecting] = useState(false);
     const [connected, setConnected] = useState(false);
 
@@ -120,17 +98,13 @@ const App = () => {
     const [volumeLevel, setVolumeLevel] = useState(0);
 
     const { showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage } = usePublicKeyInvalid();
-
     const [supabase] = useState(() => createBrowserSupabaseClient())
-
     const router = useRouter();
 
-    // hook into Vapi events
     useEffect(() => {
         const checkUser = async () => {
             const { data: { user } } = await supabase.auth.getUser()
             if (!user) {
-                // redirect("/login")
                 router.push("/login")
             }
         }
@@ -179,7 +153,6 @@ const App = () => {
     // call start handler
     const startCallInline = () => {
         setConnecting(true);
-        // vapi.start(assistantOptions);
         vapi.start(VAPI_ASSISTANT_ID);
     };
     const endCall = () => {
