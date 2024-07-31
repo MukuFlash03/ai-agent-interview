@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { SelectedListCallsResponse } from "./types/calls";
+import { SelectedFilesResponse } from "./types/files";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -17,6 +18,6 @@ export function concatenateName(name: string): string {
     .join('');
 }
 
-export function fileExists(fileName: string, existingFiles: string[]): boolean {
-  return existingFiles.some((file) => file.includes(fileName))
+export function fileExists(fileName: string, existingFiles: SelectedFilesResponse[]): boolean {
+  return existingFiles.some((file) => file.name.toLowerCase() === fileName.toLowerCase());
 }

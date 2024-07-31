@@ -4,32 +4,34 @@ const VAPI_PRIVATE_API_KEY = process.env.NEXT_PUBLIC_VAPI_PRIVATE_API_KEY!;
 
 export async function POST(request: NextRequest) {
     try {
-        const formData = await request.formData();
-        const file = formData.get('file') as File;
+        const { filename, content } = await request.json();
 
-        if (!file) {
-            return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
+        if (!filename || !content) {
+            return NextResponse.json({ error: 'Filename and content are required' }, { status: 400 });
         }
 
-        const apiFormData = new FormData();
-        apiFormData.append('file', file);
+        const formData = new FormData();
+        formData.append('file', new Blob([content], { type: 'text/plain' }), filename);
 
-        const response = await fetch('https://api.vapi.ai/file', {
+        const options = {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${VAPI_PRIVATE_API_KEY}`,
             },
-            body: apiFormData,
-        });
+            body: formData
+        };
+
+        const response = await fetch('https://api.vapi.ai/file', options);
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error - failed to upload file; status: ${response.status}`);
         }
 
-        const data = await response.json();
-        return NextResponse.json({ message: 'File uploaded to Knowledge base successfully', data });
+        const result = await response.json();
+
+        return NextResponse.json({ message: 'File uploaded successfully', data: result });
     } catch (error) {
         console.error('Error:', error);
-        return NextResponse.json({ error: 'Failed to upload file to Knowledge base' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to upload file' }, { status: 500 });
     }
 }

@@ -19,8 +19,14 @@ export function ResumeUploadForm({ user_name }: { user_name: string }) {
                 const result_fetchResumeContent = await fetchResumeContent(filePath)
                 const result_resumeQuestions = await fetchQuestions(result_fetchResumeContent.text)
                 const result_getFilesList = await getFilesListKnowledgeBase()
-                const existsFile: boolean = fileExists(`Questions_${user_name}`, result_getFilesList.fileNames)
-                const result_sendQuestionsToVapiAssistant = await sendQuestionsToVapiAssistant({ existsFile: existsFile, resumeQuestions: result_resumeQuestions.resumeQuestions })
+                const newFilename = `Questions_${user_name}`
+                const existsFile: boolean = await fileExists(newFilename, result_getFilesList.kbFilesList)
+                const result_sendQuestionsToVapiAssistant = await sendQuestionsToVapiAssistant({
+                    existsFile: existsFile,
+                    existingFiles: result_getFilesList.kbFilesList,
+                    newFilename: newFilename,
+                    resumeQuestions: result_resumeQuestions.resumeQuestions
+                })
 
 
             } catch (error) {

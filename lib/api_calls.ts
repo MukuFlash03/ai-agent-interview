@@ -1,3 +1,5 @@
+import { SelectedFilesResponse } from "./types/files";
+
 export async function fetchResumeContent(filePath: string) {
     const response = await fetch('/api/fetch-resume-text', {
         method: 'POST',
@@ -42,21 +44,23 @@ export async function getFilesListKnowledgeBase() {
     return response.json();
 }
 
-export async function createQuestionsFile(resumeQuestions: string) {
+export async function createQuestionsFile(newFilename: string, resumeQuestions: string) {
     const response = await fetch('/api/create-questions-file', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ filename: newFilename, content: resumeQuestions }),
     });
+
     if (!response.ok) {
         console.log(response);
-        throw new Error('Failed to send questions to the Vapi voice assistant.');
+        throw new Error('Failed to create new questions file to add to the Vapi voice assistant.');
     }
     return response.json();
 }
 
-export async function updateQuestionsFile(resumeQuestions: string) {
+export async function updateQuestionsFile(existingFiles: SelectedFilesResponse, resumeQuestions: string) {
     const response = await fetch('/api/update-questions-file', {
         method: 'PATCH',
         headers: {
@@ -70,10 +74,20 @@ export async function updateQuestionsFile(resumeQuestions: string) {
     return response.json();
 }
 
-export async function sendQuestionsToVapiAssistant({ existsFile, resumeQuestions }: { existsFile: boolean, resumeQuestions: string }) {
+export async function sendQuestionsToVapiAssistant({
+    existsFile,
+    existingFiles,
+    newFilename,
+    resumeQuestions,
+}: {
+    existsFile: boolean,
+    existingFiles: SelectedFilesResponse,
+    newFilename: string,
+    resumeQuestions: string,
+}) {
     if (!existsFile) {
-        await createQuestionsFile(resumeQuestions);
+        await createQuestionsFile(newFilename, resumeQuestions);
     } else {
-        await updateQuestionsFile(resumeQuestions);
+        await updateQuestionsFile(existingFiles, resumeQuestions);
     }
 }
