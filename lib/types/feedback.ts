@@ -1,4 +1,5 @@
 export type FeedbackResponse = {
+    id: string,
     interview_id: string,
     user_id: string,
     analysis?: {
@@ -6,9 +7,20 @@ export type FeedbackResponse = {
         structuredData: object,
         successEvaluation: string,
     },
+    overall_score: string,
+    metrics: string,
     transcript: string,
+    // metrics?: {
+    //     technical_skills: object,
+    //     communication: object,
+    //     problem_solving: object,
+    //     cultural_fit: object,
+    //     experience_alignment: object,
+    //     adaptability: object,
+    //     leadership_potential: object,
+    // }
 };
 
 export type SelectedFeedbackResponse = Pick<FeedbackResponse,
-    'interview_id' | 'user_id' | 'analysis' | 'transcript'
+    'id' | 'interview_id' | 'user_id' | 'analysis' | 'overall_score' | 'metrics' | 'transcript'
 >;

@@ -7,7 +7,7 @@ export async function POST(request: Request) {
 
         const supabase = createClient();
         const { data, error } = await supabase
-            .from('interviews')  // Assuming you have an 'interviews' table
+            .from('interviews')
             .insert({ user_id, email });
 
         if (error) throw error;

@@ -50,6 +50,7 @@ export async function fetchTranscripts(): Promise<SelectedListCallsResponse[]> {
             analysis: item.analysis,
             startedAt: item.startedAt,
             endedAt: item.endedAt,
+            messages: item.messages,
         }));
 
         return selectedData;

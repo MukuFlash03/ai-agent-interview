@@ -19,5 +19,5 @@ export type ListCallsResponse = {
 };
 
 export type SelectedListCallsResponse = Pick<ListCallsResponse,
-    'id' | 'transcript' | 'analysis' | 'startedAt' | 'endedAt' | 'endedReason'
+    'id' | 'transcript' | 'analysis' | 'startedAt' | 'endedAt' | 'endedReason' | 'messages'
 >;

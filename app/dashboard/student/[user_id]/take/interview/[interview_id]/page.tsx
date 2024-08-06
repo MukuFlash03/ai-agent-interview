@@ -31,8 +31,54 @@ async function updateInterviewData(candidate_data: { user_id: string; interview_
     return response.json();
 }
 
-async function updateFeedbackData(candidate_data: { interview_id: string, user_id: string; summary: string, transcript: string }) {
+async function updateFeedbackData(candidate_data: {
+    interview_id: string,
+    user_id: string,
+    summary: string,
+    transcript: string
+}) {
     const response = await fetch('/api/insert-feedback-data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(candidate_data),
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to insert feedback data');
+    }
+
+    return response.json();
+}
+
+export async function generateFeedback(candidate_data: {
+    summary: string,
+    transcript: string,
+}) {
+    const response = await fetch('/api/generate-feedback', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(candidate_data),
+    });
+    if (!response.ok) {
+        console.log(response);
+        throw new Error('Failed to generate feedback from interview transcript');
+    }
+    return response.json();
+}
+
+async function insertRecruiterFeedbackData(candidate_data: {
+    interview_id: string,
+    user_id: string,
+    summary: string,
+    overall_score: string,
+    metrics: object,
+    transcript: string,
+}) {
+    const response = await fetch('/api/insert-recruiter-feedback-data', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -85,9 +131,41 @@ const App = () => {
                 summary: data.analysis?.summary || '',
                 transcript: data.transcript || '',
             });
-            console.log('Interview data updated successfully', result);
+            console.log('Interview/Feedback data updated successfully', result);
         } catch (error) {
             console.error("Error sending interview:", error);
+        }
+    };
+
+    const handleInsertRecruiterFeedback = async () => {
+        try {
+            const { analysis, transcript } = await fetchLatestTranscripts();
+            console.log('Transcripts fetched successfully');
+
+            // const {
+            //     overall_score,
+            //     metrics
+            // } = await generateFeedback({
+            const { interviewFeedback } = await generateFeedback({
+                summary: analysis?.summary || '',
+                transcript: transcript || '',
+
+            });
+            console.log(interviewFeedback);
+
+            console.log('Feedback fetched successfully');
+
+            const result = await insertRecruiterFeedbackData({
+                interview_id: interviewId,
+                user_id: userId,
+                summary: analysis?.summary || '',
+                overall_score: interviewFeedback || '',
+                metrics: interviewFeedback || '',
+                transcript: transcript || '',
+            });
+            console.log('Feedback data updated successfully', result);
+        } catch (error) {
+            console.error("Error sending feedback:", error);
         }
     };
 
@@ -122,7 +200,7 @@ const App = () => {
             setConnected(false);
 
             setShowPublicKeyInvalidMessage(false);
-            insertTranscript()
+            // insertTranscript()
         });
 
         vapi.on("speech-start", () => {
@@ -161,6 +239,7 @@ const App = () => {
         console.log("Interview ID: " + params.interview_id);
         handleUpdateInterview();
         handleUpdateFeedback();
+        handleInsertRecruiterFeedback();
     };
 
     return (

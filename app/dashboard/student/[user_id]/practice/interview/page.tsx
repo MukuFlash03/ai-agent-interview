@@ -52,7 +52,7 @@ const App = () => {
             setConnected(false);
 
             setShowPublicKeyInvalidMessage(false);
-            insertTranscript()
+            // insertTranscript()
         });
 
         vapi.on("speech-start", () => {
