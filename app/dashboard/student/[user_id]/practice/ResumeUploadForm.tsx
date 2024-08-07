@@ -30,7 +30,6 @@ export function ResumeUploadForm({ user_name }: { user_name: string }) {
 
 
             } catch (error) {
-                // Handle error (e.g., show an error message)
                 console.error('Upload failed:', error)
             }
         })

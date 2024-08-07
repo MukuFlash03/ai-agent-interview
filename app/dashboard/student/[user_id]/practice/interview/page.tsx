@@ -29,12 +29,10 @@ const App = () => {
 
     const router = useRouter();
 
-    // hook into Vapi events
     useEffect(() => {
         const checkUser = async () => {
             const { data: { user } } = await supabase.auth.getUser()
             if (!user) {
-                // redirect("/login")
                 router.push("/login")
             }
         }
@@ -52,7 +50,6 @@ const App = () => {
             setConnected(false);
 
             setShowPublicKeyInvalidMessage(false);
-            // insertTranscript()
         });
 
         vapi.on("speech-start", () => {
@@ -80,10 +77,8 @@ const App = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // call start handler
     const startCallInline = () => {
         setConnecting(true);
-        // vapi.start(assistantOptions);
         vapi.start(VAPI_ASSISTANT_ID);
     };
     const endCall = () => {
@@ -129,7 +124,6 @@ const App = () => {
 const usePublicKeyInvalid = () => {
     const [showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage] = useState(false);
 
-    // close public key invalid message after delay
     useEffect(() => {
         if (showPublicKeyInvalidMessage) {
             setTimeout(() => {

@@ -3,20 +3,15 @@ import { createClient } from '@/utils/supabase/server';
 
 export async function POST(request: Request) {
     try {
-        // const { interview_id, user_id, email, summary, transcript } = await request.json();
-        // const { interview_id, user_id } = await request.json();
         const { interview_id, user_id, summary, transcript } = await request.json();
 
         const supabase = createClient();
         const { data, error } = await supabase
             .from('feedback')
-            // .insert({ interview_id, user_id, email, summary, transcript });
             .insert({ interview_id, user_id, summary, transcript })
             .select();
-        // .insert({ interview_id, user_id });
 
         // console.log(data);
-
 
         if (error) throw error;
 

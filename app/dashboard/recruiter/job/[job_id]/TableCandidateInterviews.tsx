@@ -64,12 +64,7 @@ export function TableCandidateInterviews({ data }: { data: SelectedCandidatesRes
 
 
     const handleSendInterview = async (candidateData: { user_id: string; email: string }) => {
-        // const handleSendInterview = async () => {
         try {
-            // const candidateData = {
-            //     user_id: candidatesResponseData[0]['user_id'],
-            //     email: candidatesResponseData[0]['email']
-            // };
             const result = await insertInterviewData(candidateData);
             console.log('Interview data inserted successfully', result);
         } catch (error) {
@@ -82,17 +77,13 @@ export function TableCandidateInterviews({ data }: { data: SelectedCandidatesRes
             <TableCaption>A list of your recent calls.</TableCaption>
             <TableHeader>
                 <TableRow>
-                    {/* <TableHead className="w-[100px]">Call ID</TableHead> */}
                     <TableHead>UserID</TableHead>
                     <TableHead>Email</TableHead>
-                    {/* <TableHead>Interview ID</TableHead> */}
                     <TableHead>Status</TableHead>
-                    {/* <TableHead className="text-right">Amount</TableHead> */}
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {candidatesResponseData
-                    // .filter(isValidItem)
                     .map((candidateData) => (
                         <TableRow key={candidateData.interview_id}>
                             <CallDataCell data={candidateData} field="user_id" />

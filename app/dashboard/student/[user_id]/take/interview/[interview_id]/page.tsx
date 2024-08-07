@@ -200,7 +200,6 @@ const App = () => {
             setConnected(false);
 
             setShowPublicKeyInvalidMessage(false);
-            // insertTranscript()
         });
 
         vapi.on("speech-start", () => {
@@ -228,7 +227,6 @@ const App = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // call start handler
     const startCallInline = () => {
         setConnecting(true);
         vapi.start(VAPI_ASSISTANT_ID);
@@ -289,7 +287,6 @@ const App = () => {
 const usePublicKeyInvalid = () => {
     const [showPublicKeyInvalidMessage, setShowPublicKeyInvalidMessage] = useState(false);
 
-    // close public key invalid message after delay
     useEffect(() => {
         if (showPublicKeyInvalidMessage) {
             setTimeout(() => {

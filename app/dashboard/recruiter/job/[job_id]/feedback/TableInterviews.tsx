@@ -40,17 +40,14 @@ async function fetchFeedbackData() {
 
 export function TableInterviews() {
     const [feedbackResponseData, setFeedbackResponseData] = useState<SelectedFeedbackResponse[] | null>(null);
-    // const [listCallsResponseData, setListCallsResponseData] = useState<SelectedListCallsResponse[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const loadData = async () => {
             try {
-                // const data = await fetchTranscripts();
-                // setListCallsResponseData(data);
                 const data = await fetchFeedbackData();
-                setFeedbackResponseData(data);
+                setFeedbackResponseData(data.data);
                 setLoading(false);
             } catch (err) {
                 setError('Failed to fetch list calls response data');
@@ -63,10 +60,9 @@ export function TableInterviews() {
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error while fetching feedback response data: {error}</div>;
-    // if (!listCallsResponseData) return <div>No call data available</div>;
     if (!feedbackResponseData) return <div>No feedback data available</div>;
 
-    // console.log(listCallsResponseData);
+    // console.log(feedbackResponseData);
 
     return (
         <Table>

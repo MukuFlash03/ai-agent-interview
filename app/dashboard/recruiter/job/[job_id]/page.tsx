@@ -12,8 +12,6 @@ interface PageProps {
     };
 }
 
-
-// export default async function StudentDashboard() {
 export default async function StudentDashboard({ params }: PageProps) {
     const supabase = createClient();
     const {
