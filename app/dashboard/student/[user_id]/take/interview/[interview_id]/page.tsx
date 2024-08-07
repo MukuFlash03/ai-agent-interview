@@ -8,7 +8,7 @@ import Vapi from "@vapi-ai/web";
 import { useState, useEffect } from 'react';
 import { isPublicKeyMissingError } from "@/lib/utils";
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
-import { fetchLatestTranscripts, insertTranscript } from '@/lib/database/manageTranscripts'
+import { fetchLatestTranscripts } from '@/lib/database/manageTranscripts'
 
 const VAPI_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_VAPI_PUBLIC_API_KEY!;
 const vapi = new Vapi(VAPI_PUBLIC_API_KEY);

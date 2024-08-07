@@ -6,20 +6,6 @@ import { ListCallsResponse, SelectedListCallsResponse } from "@/lib/types/calls"
 
 const VAPI_PRIVATE_API_KEY = process.env.NEXT_PUBLIC_VAPI_PRIVATE_API_KEY!;
 
-export async function insertTranscript() {
-    const supabase = createClient();
-
-    const {
-        data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-        return redirect("/login");
-    }
-
-    // console.log(user);
-}
-
 export async function fetchTranscripts(): Promise<SelectedListCallsResponse[]> {
     const supabase = createClient();
 
